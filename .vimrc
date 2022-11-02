@@ -6,18 +6,15 @@ Plug 'vim-scripts/taglist.vim'
 Plug 'vim-scripts/winmanager'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'preservim/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'Lokaltog/powerline'
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 Plug 'scrooloose/nerdcommenter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'thinktainer/omnicppcomplete'
 Plug 'valloric/youcompleteme'
-Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-
+" Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ctrlpvim/ctrlp.vim'
 call plug#end()
 
 set nocompatible
@@ -25,8 +22,6 @@ set nocompatible
 " detect file type
 filetype on
 filetype plugin on
-
-
 syntax on
 
 set helplang=cn
@@ -34,7 +29,6 @@ set showmode
 set showcmd
 set mouse=a
 set encoding=utf-8
-set t_Co=256
 set cursorline
 set scrolloff=5
 set laststatus=2
@@ -44,6 +38,7 @@ filetype indent on
 syntax enable
 
 set background=dark
+set t_Co=256
 colorscheme molokai
 
 set autoindent
@@ -58,8 +53,6 @@ set smartcase
 set undofile
 
 set autochdir
-set noerrorbells
-set visualbell
 set history=200
 set autoread
 
@@ -73,6 +66,23 @@ set conceallevel=0
 
 set ttimeout
 set ttimeoutlen=0
+
+let mapleader=","
+
+" search settings
+autocmd cursorhold * set nohlsearch 
+noremap n :set hlsearch<CR>n
+noremap N :set hlsearch<CR>N
+noremap / :set hlsearch<CR>/
+noremap ? :set hlsearch<CR>?
+noremap * *:set hlsearch<CR>
+
+" fold settings
+set fdm=syntax
+" au BufWinLeave * silent mkview
+" au BufRead * silent loadview
+nnoremap <space> za
+" set foldlevel=1
 
 " buffers
 nnoremap <S-Tab> :bprev<Return>
@@ -101,13 +111,17 @@ let Tlist_Use_Right_Window = 1
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
 autocmd vimenter * NERDTree | wincmd p
-map <F2> :NERDTreeToggle<CR>
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 let g:NERDTreeHidden=1
 let g:NERDTreeShowLineNumbers=1
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+let NERDTreeWinSize = 40
 
 " nredcommenter
-let g:NERDSpaceDelims=1
+let g:NERDSpaceDelims = 1
 
 " winmanager
 let g:winManagerWindowLayout = "TagList|FileExplorer,BuffExplorer"
@@ -116,13 +130,13 @@ map <F4> :WMToggle<CR>
 
 " airline
 let g:airline_theme = 'angr'
+let g:aielien_solarized_bg = 'dark'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
-
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
@@ -136,12 +150,39 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 " indentline 
 let g:indentLine_enabled = 1
 
-" YCM
+" youcompleteme
 let g:ycm_show_diagnostics_ui = 0
+let g:ycm_max_num_candidates = 10
+let g:ycm_complete_in_strings = 1
+
 
 " vim-markdown
 let g:vim_markdown_math = 1
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_conceal_code_blocks = 0
+
+" nerdtree git plugin
+" let g:NERDTreeGitStatusIndicatorMapCustom = {
+                " \ 'Modified'  :'✹',
+                " \ 'Staged'    :'✚',
+                " \ 'Untracked' :'✭',
+                " \ 'Renamed'   :'➜',
+                " \ 'Unmerged'  :'═',
+                " \ 'Deleted'   :'✖',
+                " \ 'Dirty'     :'✗',
+                " \ 'Ignored'   :'☒',
+                " \ 'Clean'     :'✔︎',
+                " \ 'Unknown'   :'?',
+    "             \ }
+
+" ctrlp
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+noremap <leader>f :CtrlPMRU<CR>
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    \ }
+let g:ctrlp_working_path_mode = 'ra'
 
