@@ -15,6 +15,7 @@ Plug 'valloric/youcompleteme'
 Plug 'plasticboy/vim-markdown'
 " Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ctrlpvim/ctrlp.vim'
+
 call plug#end()
 
 set nocompatible
@@ -46,18 +47,20 @@ set tabstop=4
 set softtabstop=4
 set expandtab
 set shiftwidth=4
-set showmatch
+" set showmatch
 set hlsearch
 set ignorecase
 set smartcase
 set undofile
+set cc=80
 
-set autochdir
 set history=200
 set autoread
 
 set wildmenu
 set wildmode=longest:list,full
+
+let loaded_matchparen = 1
 
 set list
 set listchars=tab:>-,trail:-
@@ -96,6 +99,30 @@ let Tlist_Show_One_File = 1
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_Window_Width = 50
 let Tlist_Use_Right_Window = 1
+
+" cscope
+if has("cscope")
+    set csre
+    set csprg=/usr/bin/cscope
+    set csto=0
+    set cst
+    set nocsverb
+    " add any database in current directory
+    if filereadable("cscope.out")
+        cs add cscope.out
+    endif
+    set csverb
+endif
+
+nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-_>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-_>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-_>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+nmap <C-_>a :cs find a <C-R>=expand("<cword>")<CR><CR>
 
 " gutentags 
 " let g:gutentags_porject_root = ['.root', '.svn', '.git', '.project']
@@ -154,7 +181,7 @@ let g:indentLine_enabled = 1
 let g:ycm_show_diagnostics_ui = 0
 let g:ycm_max_num_candidates = 10
 let g:ycm_complete_in_strings = 1
-
+let g:ycm_key_list_stop_completion = ['<CR>']
 
 " vim-markdown
 let g:vim_markdown_math = 1
