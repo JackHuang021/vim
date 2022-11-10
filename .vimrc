@@ -3,7 +3,6 @@ call plug#begin()
 
 Plug 'tomasr/molokai'
 Plug 'vim-scripts/taglist.vim'
-Plug 'vim-scripts/winmanager'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'preservim/nerdtree'
 Plug 'mhinz/vim-startify'
@@ -25,7 +24,6 @@ filetype on
 filetype plugin on
 syntax on
 
-set helplang=cn
 set showmode
 set showcmd
 set mouse=a
@@ -38,6 +36,7 @@ set number
 filetype indent on
 syntax enable
 
+" theme
 set background=dark
 set t_Co=256
 colorscheme molokai
@@ -47,7 +46,7 @@ set tabstop=4
 set softtabstop=4
 set expandtab
 set shiftwidth=4
-" set showmatch
+set showmatch
 set hlsearch
 set ignorecase
 set smartcase
@@ -60,20 +59,21 @@ set autoread
 set wildmenu
 set wildmode=longest:list,full
 
-let loaded_matchparen = 1
+let loaded_matchparen = 1               " set to avoid highlight match paren
 
+" show space and table characters
 set list
 set listchars=tab:>-,trail:-
 
 set conceallevel=0
 
 set ttimeout
-set ttimeoutlen=0
+set ttimeoutlen=100
 
 let mapleader=","
 
 " search settings
-autocmd cursorhold * set nohlsearch 
+autocmd cursorhold * set nohlsearch
 noremap n :set hlsearch<CR>n
 noremap N :set hlsearch<CR>N
 noremap / :set hlsearch<CR>/
@@ -81,10 +81,10 @@ noremap ? :set hlsearch<CR>?
 noremap * *:set hlsearch<CR>
 
 " fold settings
-set fdm=syntax
+" set fdm=syntax
 " au BufWinLeave * silent mkview
 " au BufRead * silent loadview
-nnoremap <space> za
+" nnoremap <space> za
 " set foldlevel=1
 
 " buffers
@@ -93,7 +93,6 @@ nnoremap <Tab> :bnext<Return>
 
 " taglist
 map <F3> :TlistToggle<CR>
-map <c-]> g<c-]>
 let Tlist_File_Fold_Auto_Close = 1
 let Tlist_Show_One_File = 1
 let Tlist_Exit_OnlyWindow = 1
@@ -114,25 +113,15 @@ if has("cscope")
     set csverb
 endif
 
-nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <C-_>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-_>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <C-_>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-nmap <C-_>a :cs find a <C-R>=expand("<cword>")<CR><CR>
-
-" gutentags 
-" let g:gutentags_porject_root = ['.root', '.svn', '.git', '.project']
-" let g:gutentags_ctags_tagfile = '.tags'
-" let s:vim_tags = expand('~/.cache/tags')
-" let g:gutentags_cache_dir = s:vim_tags
-
-" if !isdirectory(s:vim_tags)
-" 	silent! call mkdir(s:vim_tags, 'p')
-" endif
+nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>a :cs find a <C-R>=expand("<cword>")<CR><CR>
 
 " nerdtree
 let g:NERDTreeDirArrowExpandable = '+'
@@ -141,7 +130,7 @@ autocmd vimenter * NERDTree | wincmd p
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 let g:NERDTreeHidden=1
 let g:NERDTreeShowLineNumbers=1
-nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
@@ -149,11 +138,6 @@ let NERDTreeWinSize = 40
 
 " nredcommenter
 let g:NERDSpaceDelims = 1
-
-" winmanager
-let g:winManagerWindowLayout = "TagList|FileExplorer,BuffExplorer"
-let g:winManagerWidth = 50
-map <F4> :WMToggle<CR>
 
 " airline
 let g:airline_theme = 'angr'
@@ -178,10 +162,14 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 let g:indentLine_enabled = 1
 
 " youcompleteme
+set completeopt=menu,menuone
+let g:ycm_collect_identifier_from_comments_and_strings = 1
+let g:ycm_enable_semantic_highlighting = 1
 let g:ycm_show_diagnostics_ui = 0
 let g:ycm_max_num_candidates = 10
 let g:ycm_complete_in_strings = 1
-let g:ycm_key_list_stop_completion = ['<CR>']
+let g:ycm_complete_in_comments = 1
+let g:ycm_add_preview_to_completeopt = 0
 
 " vim-markdown
 let g:vim_markdown_math = 1
