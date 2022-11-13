@@ -3,7 +3,7 @@ call plug#begin()
 
 Plug 'tomasr/molokai'
 Plug 'vim-scripts/taglist.vim'
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 Plug 'preservim/nerdtree'
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
@@ -13,6 +13,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'valloric/youcompleteme'
 Plug 'plasticboy/vim-markdown'
 " Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'ctrlpvim/ctrlp.vim'
 
 call plug#end()
@@ -58,6 +59,10 @@ set autoread
 
 set wildmenu
 set wildmode=longest:list,full
+
+set wrap
+" noremap j (v:count == 0 ? 'gj' : 'j')
+" noremap k (v:count == 0 ? 'gk' : 'k')
 
 let loaded_matchparen = 1               " set to avoid highlight match paren
 
@@ -166,7 +171,7 @@ set completeopt=menu,menuone
 let g:ycm_collect_identifier_from_comments_and_strings = 1
 let g:ycm_enable_semantic_highlighting = 1
 let g:ycm_show_diagnostics_ui = 0
-let g:ycm_max_num_candidates = 10
+let g:ycm_max_num_candidates = 30
 let g:ycm_complete_in_strings = 1
 let g:ycm_complete_in_comments = 1
 let g:ycm_add_preview_to_completeopt = 0
@@ -201,3 +206,5 @@ let g:ctrlp_custom_ignore = {
     \ }
 let g:ctrlp_working_path_mode = 'ra'
 
+" markdown preview
+nmap <F5> <Plug>MarkdownPreviewToggle
