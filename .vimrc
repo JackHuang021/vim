@@ -26,7 +26,7 @@ filetype plugin on
 syntax on
 
 set showmode
-set showcmd
+" set showcmd
 set mouse=a
 set encoding=utf-8
 set cursorline
@@ -65,6 +65,9 @@ set wrap
 " noremap k (v:count == 0 ? 'gk' : 'k')
 
 let loaded_matchparen = 1               " set to avoid highlight match paren
+
+" copy and paste
+set clipboard^=unnamed,unnamedplus
 
 " show space and table characters
 set list
