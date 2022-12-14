@@ -3,7 +3,6 @@ call plug#begin()
 
 Plug 'tomasr/molokai'
 Plug 'vim-scripts/taglist.vim'
-" Plug 'ludovicchabant/vim-gutentags'
 Plug 'preservim/nerdtree'
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
@@ -11,10 +10,10 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'valloric/youcompleteme'
-Plug 'plasticboy/vim-markdown'
-" Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'preservim/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'gwww/vim-bbye'
 
 call plug#end()
 
@@ -26,7 +25,7 @@ filetype plugin on
 syntax on
 
 set showmode
-" set showcmd
+set showcmd
 set mouse=a
 set encoding=utf-8
 set cursorline
@@ -45,7 +44,6 @@ colorscheme molokai
 set autoindent
 set tabstop=4
 set softtabstop=4
-set expandtab
 set shiftwidth=4
 set showmatch
 set hlsearch
@@ -53,17 +51,16 @@ set ignorecase
 set smartcase
 set undofile
 set cc=80
+set hidden
 
 set history=200
 set autoread
 
 set wildmenu
 set wildmode=longest:list,full
-
 set wrap
-" noremap j (v:count == 0 ? 'gj' : 'j')
-" noremap k (v:count == 0 ? 'gk' : 'k')
 
+" set to avoid highlight match paren
 let loaded_matchparen = 1               " set to avoid highlight match paren
 
 " copy and paste
@@ -74,6 +71,9 @@ set list
 set listchars=tab:>-,trail:-
 
 set conceallevel=0
+
+" disable auto insert after newline
+autocmd BufNewFile,BufRead * setlocal formatoptions-=crona
 
 set ttimeout
 set ttimeoutlen=100
@@ -178,6 +178,8 @@ let g:ycm_max_num_candidates = 30
 let g:ycm_complete_in_strings = 1
 let g:ycm_complete_in_comments = 1
 let g:ycm_add_preview_to_completeopt = 0
+" nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <F12> :YcmCompleter GoToDefinition<CR>
 
 " vim-markdown
 let g:vim_markdown_math = 1
@@ -211,3 +213,6 @@ let g:ctrlp_working_path_mode = 'ra'
 
 " markdown preview
 nmap <F5> <Plug>MarkdownPreviewToggle
+
+" vim bbye
+nnoremap <leader>d :Bd<CR>
