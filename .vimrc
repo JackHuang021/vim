@@ -49,7 +49,7 @@ set showmatch
 set hlsearch
 set ignorecase
 set smartcase
-set undofile
+set noundofile
 set cc=80
 set hidden
 
@@ -174,12 +174,20 @@ set completeopt=menu,menuone
 let g:ycm_collect_identifier_from_comments_and_strings = 1
 let g:ycm_enable_semantic_highlighting = 1
 let g:ycm_show_diagnostics_ui = 0
-let g:ycm_max_num_candidates = 30
+let g:ycm_max_num_candidates = 20
 let g:ycm_complete_in_strings = 1
 let g:ycm_complete_in_comments = 1
 let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_semantic_triggers = {
+							\ 'c,cpp': ['re!\w{2}'],
+						\ }
+let g:ycm_global_ycm_extra_conf = "/home/jack/.vim/.ycm_extra_conf.py"
+let g:ycm_confirm_extra_conf = 0
+
 " nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F12> :YcmCompleter GoToDefinition<CR>
+
+
 
 " vim-markdown
 let g:vim_markdown_math = 1
