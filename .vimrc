@@ -2,7 +2,7 @@
 call plug#begin()
 
 Plug 'tomasr/molokai'
-Plug 'vim-scripts/taglist.vim'
+Plug 'majutsushi/tagbar'
 Plug 'preservim/nerdtree'
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
@@ -12,8 +12,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'valloric/youcompleteme'
 Plug 'preservim/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'gwww/vim-bbye'
+Plug 'w0rp/ale'
+Plug 'yggdroot/leaderf'
 
 call plug#end()
 
@@ -99,13 +100,20 @@ noremap * *:set hlsearch<CR>
 nnoremap <S-Tab> :bprev<Return>
 nnoremap <Tab> :bnext<Return>
 
-" taglist
-map <F3> :TlistToggle<CR>
-let Tlist_File_Fold_Auto_Close = 1
-let Tlist_Show_One_File = 1
-let Tlist_Exit_OnlyWindow = 1
-let Tlist_Window_Width = 50
-let Tlist_Use_Right_Window = 1
+" " taglist
+" map <F3> :TlistToggle<CR>
+" let Tlist_File_Fold_Auto_Close = 1
+" let Tlist_Show_One_File = 1
+" let Tlist_Exit_OnlyWindow = 1
+" let Tlist_Window_Width = 50
+" let Tlist_Use_Right_Window = 1
+
+" tagbar
+nmap <F3> :TagbarToggle<CR>
+let g:tagbar_width = 50
+let g:tagbar_right = 1
+autocmd BufReadPost *.cpp,*.c,*.h,*.cc,*.cxx call tagbar#autoopen()
+
 
 " cscope
 if has("cscope")
@@ -137,7 +145,7 @@ let g:NERDTreeDirArrowCollapsible = '-'
 autocmd vimenter * NERDTree | wincmd p
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 let g:NERDTreeHidden=1
-let g:NERDTreeShowLineNumbers=1
+let g:NERDTreeShowLineNumbers=0
 nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
@@ -156,6 +164,7 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#ale#enabled = 1
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
@@ -187,8 +196,6 @@ let g:ycm_confirm_extra_conf = 0
 " nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F12> :YcmCompleter GoToDefinition<CR>
 
-
-
 " vim-markdown
 let g:vim_markdown_math = 1
 let g:vim_markdown_folding_disabled = 1
@@ -209,18 +216,26 @@ let g:vim_markdown_conceal_code_blocks = 0
                 " \ 'Unknown'   :'?',
     "             \ }
 
-" ctrlp
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-noremap <leader>f :CtrlPMRU<CR>
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
-    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
-    \ }
-let g:ctrlp_working_path_mode = 'ra'
+" " ctrlp
+" let g:ctrlp_map = '<c-p>'
+" let g:ctrlp_cmd = 'CtrlP'
+" noremap <leader>f :CtrlPMRU<CR>
+" let g:ctrlp_custom_ignore = {
+    " \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+    " \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    " \ }
+" let g:ctrlp_working_path_mode = 'ra'
 
 " markdown preview
 nmap <F5> <Plug>MarkdownPreviewToggle
 
 " vim bbye
 nnoremap <leader>d :Bd<CR>
+
+" ale
+let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
+let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
+let g:ale_sign_column_always = 1
+
+" LeaderF
+
