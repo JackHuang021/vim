@@ -11,7 +11,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'valloric/youcompleteme'
 Plug 'preservim/vim-markdown'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'gwww/vim-bbye'
 Plug 'w0rp/ale'
 Plug 'yggdroot/leaderf'
@@ -46,6 +45,7 @@ set autoindent
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+set noexpandtab
 set showmatch
 set hlsearch
 set ignorecase
@@ -89,31 +89,15 @@ noremap / :set hlsearch<CR>/
 noremap ? :set hlsearch<CR>?
 noremap * *:set hlsearch<CR>
 
-" fold settings
-" set fdm=syntax
-" au BufWinLeave * silent mkview
-" au BufRead * silent loadview
-" nnoremap <space> za
-" set foldlevel=1
-
 " buffers
 nnoremap <S-Tab> :bprev<Return>
 nnoremap <Tab> :bnext<Return>
-
-" " taglist
-" map <F3> :TlistToggle<CR>
-" let Tlist_File_Fold_Auto_Close = 1
-" let Tlist_Show_One_File = 1
-" let Tlist_Exit_OnlyWindow = 1
-" let Tlist_Window_Width = 50
-" let Tlist_Use_Right_Window = 1
 
 " tagbar
 nmap <F3> :TagbarToggle<CR>
 let g:tagbar_width = 50
 let g:tagbar_right = 1
 autocmd BufReadPost *.cpp,*.c,*.h,*.cc,*.cxx call tagbar#autoopen()
-
 
 " cscope
 if has("cscope")
@@ -192,42 +176,14 @@ let g:ycm_semantic_triggers = {
 						\ }
 let g:ycm_global_ycm_extra_conf = "/home/jack/.vim/.ycm_extra_conf.py"
 let g:ycm_confirm_extra_conf = 0
-
+let g:ycm_clangd_args = ['--header-insertion=never']
 " nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F12> :YcmCompleter GoToDefinition<CR>
 
-" vim-markdown
 let g:vim_markdown_math = 1
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_conceal_code_blocks = 0
-
-" nerdtree git plugin
-" let g:NERDTreeGitStatusIndicatorMapCustom = {
-                " \ 'Modified'  :'✹',
-                " \ 'Staged'    :'✚',
-                " \ 'Untracked' :'✭',
-                " \ 'Renamed'   :'➜',
-                " \ 'Unmerged'  :'═',
-                " \ 'Deleted'   :'✖',
-                " \ 'Dirty'     :'✗',
-                " \ 'Ignored'   :'☒',
-                " \ 'Clean'     :'✔︎',
-                " \ 'Unknown'   :'?',
-    "             \ }
-
-" " ctrlp
-" let g:ctrlp_map = '<c-p>'
-" let g:ctrlp_cmd = 'CtrlP'
-" noremap <leader>f :CtrlPMRU<CR>
-" let g:ctrlp_custom_ignore = {
-    " \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
-    " \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
-    " \ }
-" let g:ctrlp_working_path_mode = 'ra'
-
-" markdown preview
-nmap <F5> <Plug>MarkdownPreviewToggle
 
 " vim bbye
 nnoremap <leader>d :Bd<CR>
@@ -238,4 +194,7 @@ let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
 let g:ale_sign_column_always = 1
 
 " LeaderF
-
+let g:Lf_ShortcutF = '<c-p>'
+let g:Lf_ShortcutB = '<c-l>'
+let g:Lf_WorkingDirectoryMode = 'AF'
+let g:Lf_RootMarkers = ['.git', '.svn', '.project', '.root']
