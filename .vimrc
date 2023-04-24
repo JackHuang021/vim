@@ -14,6 +14,7 @@ Plug 'preservim/vim-markdown'
 Plug 'gwww/vim-bbye'
 Plug 'w0rp/ale'
 Plug 'yggdroot/leaderf'
+Plug 'ctrlpvim/ctrlp.vim'
 
 call plug#end()
 
@@ -95,8 +96,10 @@ nnoremap <Tab> :bnext<Return>
 
 " tagbar
 nmap <F3> :TagbarToggle<CR>
-let g:tagbar_width = 50
+let g:tagbar_width = 25
 let g:tagbar_right = 1
+" not sort tags by name
+let g:tagbar_sort = 0
 autocmd BufReadPost *.cpp,*.c,*.h,*.cc,*.cxx call tagbar#autoopen()
 
 " cscope
@@ -126,7 +129,7 @@ nmap <C-\>a :cs find a <C-R>=expand("<cword>")<CR><CR>
 " nerdtree
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
-autocmd vimenter * NERDTree | wincmd p
+" autocmd vimenter * NERDTree | wincmd p
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 let g:NERDTreeHidden=1
 let g:NERDTreeShowLineNumbers=0
@@ -148,7 +151,6 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline#extensions#ale#enabled = 1
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
@@ -159,7 +161,7 @@ nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 
-" indentline 
+" indentline
 let g:indentLine_enabled = 1
 
 " youcompleteme
@@ -176,6 +178,7 @@ let g:ycm_semantic_triggers = {
 						\ }
 let g:ycm_global_ycm_extra_conf = "/home/jack/.vim/.ycm_extra_conf.py"
 let g:ycm_confirm_extra_conf = 0
+" not auto insert header files when coding
 let g:ycm_clangd_args = ['--header-insertion=never']
 " nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F12> :YcmCompleter GoToDefinition<CR>
@@ -198,3 +201,9 @@ let g:Lf_ShortcutF = '<c-p>'
 let g:Lf_ShortcutB = '<c-l>'
 let g:Lf_WorkingDirectoryMode = 'AF'
 let g:Lf_RootMarkers = ['.git', '.svn', '.project', '.root']
+let g:Lf_ReverseOrder = 1
+
+" ctrlp
+noremap <leader>f :CtrlPMRU<CR>
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_cmd = 'CtrlP'
