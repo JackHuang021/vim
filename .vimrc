@@ -18,49 +18,57 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 call plug#end()
 
+" general settings
+let mapleader=","
 set nocompatible
-
-" detect file type
 filetype on
 filetype plugin on
+set noeb
+syntax enable
 syntax on
-
 set showmode
 set showcmd
-set mouse=a
-set encoding=utf-8
 set cursorline
 set scrolloff=5
 set laststatus=2
 set ruler
 set number
-filetype indent on
-syntax enable
+set virtualedit=block,onemore
+set mouse=a
+set history=200
+set autoread
+set wrap
+set wildmenu
+set nobackup
+set noswapfile
+set confirm
+
+" encoding settings
+set encoding=utf-8
+set termencoding=utf-8
 
 " theme
 set background=dark
 set t_Co=256
 colorscheme molokai
 
+" code indentation and layout
 set autoindent
+set cindent
+set smartindent
+filetype indent on
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set noexpandtab
 set showmatch
 set hlsearch
-set ignorecase
 set smartcase
 set noundofile
 set cc=80
 set hidden
 
-set history=200
-set autoread
-
-set wildmenu
 set wildmode=longest:list,full
-set wrap
 
 " set to avoid highlight match paren
 let loaded_matchparen = 1               " set to avoid highlight match paren
@@ -80,9 +88,9 @@ autocmd BufNewFile,BufRead * setlocal formatoptions-=crona
 set ttimeout
 set ttimeoutlen=100
 
-let mapleader=","
 
 " search settings
+set ignorecase
 autocmd cursorhold * set nohlsearch
 noremap n :set hlsearch<CR>n
 noremap N :set hlsearch<CR>N
@@ -96,7 +104,7 @@ nnoremap <Tab> :bnext<Return>
 
 " tagbar
 nmap <F3> :TagbarToggle<CR>
-let g:tagbar_width = 25
+let g:tagbar_width = 50
 let g:tagbar_right = 1
 " not sort tags by name
 let g:tagbar_sort = 0
@@ -129,10 +137,10 @@ nmap <C-\>a :cs find a <C-R>=expand("<cword>")<CR><CR>
 " nerdtree
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
-" autocmd vimenter * NERDTree | wincmd p
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 let g:NERDTreeHidden=1
 let g:NERDTreeShowLineNumbers=0
+autocmd vimenter * NERDTree | wincmd p
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
@@ -166,6 +174,7 @@ let g:indentLine_enabled = 1
 
 " youcompleteme
 set completeopt=menu,menuone
+let g:ycm_auto_hover = ''
 let g:ycm_collect_identifier_from_comments_and_strings = 1
 let g:ycm_enable_semantic_highlighting = 1
 let g:ycm_show_diagnostics_ui = 0
@@ -183,6 +192,7 @@ let g:ycm_clangd_args = ['--header-insertion=never']
 " nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F12> :YcmCompleter GoToDefinition<CR>
 
+" vim_markdown
 let g:vim_markdown_math = 1
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal = 0
@@ -202,6 +212,10 @@ let g:Lf_ShortcutB = '<c-l>'
 let g:Lf_WorkingDirectoryMode = 'AF'
 let g:Lf_RootMarkers = ['.git', '.svn', '.project', '.root']
 let g:Lf_ReverseOrder = 1
+let g:Lf_WildIgnore = {
+            \ 'dir': ['.svn','.git','.hg','.vscode','.deepinwine','.oh-my-zsh'],
+            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
+            \}
 
 " ctrlp
 noremap <leader>f :CtrlPMRU<CR>
