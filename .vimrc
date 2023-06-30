@@ -1,4 +1,4 @@
-" vim-plug 
+" vim-plug
 call plug#begin()
 
 Plug 'tomasr/molokai'
@@ -12,7 +12,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'valloric/youcompleteme'
 Plug 'preservim/vim-markdown'
 Plug 'gwww/vim-bbye'
-Plug 'w0rp/ale'
 Plug 'yggdroot/leaderf'
 Plug 'ctrlpvim/ctrlp.vim'
 
@@ -159,6 +158,7 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tagbar#enabled = 0
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
@@ -201,23 +201,21 @@ let g:vim_markdown_conceal_code_blocks = 0
 " vim bbye
 nnoremap <leader>d :Bd<CR>
 
-" ale
-let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
-let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
-let g:ale_sign_column_always = 1
+" ctrlp
+let g:ctrlp_map = '<leader>p'
+noremap <leader>f :CtrlPMRU<CR>
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_cmd = 'CtrlP'
 
 " LeaderF
-let g:Lf_ShortcutF = '<c-p>'
-let g:Lf_ShortcutB = '<c-l>'
+let g:Lf_ShortcutF = '<C-P>'
+let g:Lf_ShortcutB = '<C-L>'
+let g:Lf_ShowDevIcons = 0
 let g:Lf_WorkingDirectoryMode = 'AF'
 let g:Lf_RootMarkers = ['.git', '.svn', '.project', '.root']
 let g:Lf_ReverseOrder = 1
 let g:Lf_WildIgnore = {
             \ 'dir': ['.svn','.git','.hg','.vscode','.deepinwine','.oh-my-zsh'],
-            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
+            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o', '*.ko', '*.so','*.py[co]']
             \}
 
-" ctrlp
-noremap <leader>f :CtrlPMRU<CR>
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_cmd = 'CtrlP'
