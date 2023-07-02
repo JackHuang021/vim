@@ -14,7 +14,7 @@ Plug 'preservim/vim-markdown'
 Plug 'gwww/vim-bbye'
 Plug 'yggdroot/leaderf'
 Plug 'ctrlpvim/ctrlp.vim'
-
+Plug 'ARM9/arm-syntax-vim'
 call plug#end()
 
 " general settings
@@ -219,3 +219,5 @@ let g:Lf_WildIgnore = {
             \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o', '*.ko', '*.so','*.py[co]']
             \}
 
+" arm-syntax-vim, GNU ARM assembly syntax highlighting
+au BufNewFile,BufRead *.s,*.S set filetype=arm
