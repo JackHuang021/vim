@@ -218,6 +218,7 @@ let g:Lf_WildIgnore = {
             \ 'dir': ['.svn','.git','.hg','.vscode','.deepinwine','.oh-my-zsh'],
             \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o', '*.ko', '*.so','*.py[co]']
             \}
+let g:Lf_PreviewInPopup = 0
 
 " arm-syntax-vim, GNU ARM assembly syntax highlighting
 au BufNewFile,BufRead *.s,*.S set filetype=arm
