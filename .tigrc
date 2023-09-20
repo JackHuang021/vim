@@ -1,0 +1,7 @@
+# configuration file for tig
+# refrence: https://jonas.github.io/tig/doc/tigrc.5.html
+# refrence: https://github.com/bbxytl/b-dotfiles/blob/master/others/tigrc
+
+set main-view = date:default author:email-user id:yes,color \
+		line-number:no,interval=5 \
+		commit-title:graph=v2,refs=yes,overflow=no

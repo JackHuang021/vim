@@ -185,7 +185,6 @@ let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_semantic_triggers = {
 							\ 'c,cpp': ['re!\w{2}'],
 						\ }
-let g:ycm_global_ycm_extra_conf = "/home/jack/.vim/.ycm_extra_conf.py"
 let g:ycm_confirm_extra_conf = 0
 " not auto insert header files when coding
 let g:ycm_clangd_args = ['--header-insertion=never']
