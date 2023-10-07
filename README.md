@@ -1,4 +1,5 @@
-#### Vim Config File
+#### Config Files
 
-
-+ some useful plugins and settings in Vim
++ .tigrc: tig config file
++ .vimrc: vim config file
++ .zshrc: zsh config file
