@@ -136,10 +136,10 @@ nmap <C-\>a :cs find a <C-R>=expand("<cword>")<CR><CR>
 " nerdtree
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
-let g:NERDTreeHidden=1
-let g:NERDTreeShowLineNumbers=0
+let g:NERDTreeHidden = 1
+let g:NERDTreeShowLineNumbers = 0
 autocmd vimenter * NERDTree | wincmd p
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+autocmd BufEnter * ++nested if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
