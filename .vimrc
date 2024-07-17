@@ -47,7 +47,7 @@ set encoding=utf-8
 set termencoding=utf-8
 
 " theme
-set background=dark
+" set termguicolors
 set t_Co=256
 colorscheme molokai
 
@@ -151,7 +151,7 @@ let g:NERDSpaceDelims = 1
 
 " airline
 let g:airline_theme = 'angr'
-let g:aielien_solarized_bg = 'dark'
+let g:airline_solarized_bg = 'dark'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
@@ -185,7 +185,7 @@ let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_semantic_triggers = {
 							\ 'c,cpp': ['re!\w{2}'],
 						\ }
-let g:ycm_confirm_extra_conf = 0
+let g:ycm_confirm_extra_conf = 1
 " not auto insert header files when coding
 let g:ycm_clangd_args = ['--header-insertion=never']
 " nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<CR>
