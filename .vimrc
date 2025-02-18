@@ -87,7 +87,6 @@ autocmd BufNewFile,BufRead * setlocal formatoptions-=crona
 set ttimeout
 set ttimeoutlen=100
 
-
 " search settings
 set ignorecase
 autocmd cursorhold * set nohlsearch
@@ -108,6 +107,7 @@ let g:tagbar_right = 1
 " not sort tags by name
 let g:tagbar_sort = 0
 autocmd BufReadPost *.cpp,*.c,*.h,*.cc,*.cxx call tagbar#autoopen()
+autocmd QuitPre * qa
 
 " cscope
 if has("cscope")
@@ -139,7 +139,8 @@ let g:NERDTreeDirArrowCollapsible = '-'
 let g:NERDTreeHidden = 1
 let g:NERDTreeShowLineNumbers = 0
 autocmd vimenter * NERDTree | wincmd p
-autocmd BufEnter * ++nested if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+" Close the tab if NERDTree is the only window remaining in it.
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call feedkeys(":quit\<CR>:\<BS>") | endif
 nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
@@ -190,6 +191,15 @@ let g:ycm_confirm_extra_conf = 1
 let g:ycm_clangd_args = ['--header-insertion=never']
 " nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F12> :YcmCompleter GoToDefinition<CR>
+
+let MY_YCM_HIGHLIGHT_GROUP = {
+      \   'label': 'Normal',
+      \ }
+
+for tokenType in keys( MY_YCM_HIGHLIGHT_GROUP )
+  call prop_type_add( 'YCM_HL_' . tokenType,
+                    \ { 'highlight': MY_YCM_HIGHLIGHT_GROUP[ tokenType ] } )
+endfor
 
 " vim_markdown
 let g:vim_markdown_math = 1
